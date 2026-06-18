@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Result1.h"
 #include"Title.h"
-
+#include"sound/SoundEngine.h"
 Result1::Result1() {
 	//ゲームクリアの画像を読み込む
 	spriteRender.Init("Assets/sprite/result.dds",1920.0f,1080.0f);
@@ -13,6 +13,12 @@ Result1::Result1() {
 	scoreRender.SetPosition({ -600.0f,-50.0f,0.0f });
 	scoreRender.SetColor(g_vec4Black);
 	scoreRender.SetScale(2.0f);
+	//リザルト画面のBGMを読み込む
+	g_soundEngine->ResistWaveFileBank(4, "Assets/sound/result.wav");
+	//リザルト画面のBGMを再生する。
+	ResultBGM = NewGO<SoundSource>(0);
+	ResultBGM->Init(4);
+	ResultBGM->Play(true);
 }
 
 Result1::~Result1() {
@@ -34,6 +40,12 @@ void Result1::Update() {
 
 	//Aボタンが押されたら
 	if (g_pad[0]->IsTrigger(enButtonA)) {
+		// BGM を止めて解放する
+		if (ResultBGM) {
+			ResultBGM->Stop();
+			ResultBGM->Release();
+			ResultBGM = nullptr;
+		}
 		//タイトルのオブジェクトを作る
 		NewGO<Title>(0, "title");
 		//自身を削除する

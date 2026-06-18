@@ -58,10 +58,10 @@ Game::Game()
 	goal = NewGO<Goal>(0, "goal");
 	goal->position = { 50000.0f, 5000.0f, 5000.0f };
 	//ゲーム中のBGMを読み込む
-	g_soundEngine->ResistWaveFileBank(2, "Assets/sound/gamebgm.wav");
+	g_soundEngine->ResistWaveFileBank(1, "Assets/sound/Gamebgm.wav");
     //ゲーム中のBGMを再生する
 	gameBGM = NewGO<SoundSource>(0);
-	gameBGM->Init(2);
+	gameBGM->Init(1);
 	gameBGM->Play(true);
 
 
@@ -103,6 +103,11 @@ void Game::Update()
 		}
 	}
 	if (goal->getGoal==true) {
+		if (gameBGM) {
+			gameBGM->Stop();
+			gameBGM->Release();
+			gameBGM = nullptr;
+		}
 		// ゴール処理: Result画面に遷移
 		GameClear* gameClear = NewGO<GameClear>(0, "gameClear");
 		// 経過時間とスコアを渡す

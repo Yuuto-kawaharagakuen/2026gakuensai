@@ -1,4 +1,5 @@
 #pragma once
+#include"sound/SoundEngine.h"
 //ゲームクリア
 class GameClear:public IGameObject
 {
@@ -10,6 +11,7 @@ public:
 	void Render(RenderContext& rc);
 
 	// メンバ変数
+	SoundSource* GameClearBGM;
 	SpriteRender spriteRender;
 	float elapsedTime = 0.0f;
 	int score = 0;

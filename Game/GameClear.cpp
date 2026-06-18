@@ -2,10 +2,15 @@
 #include "GameClear.h"
 #include "Result1.h"
 #include "Title.h"
-
+#include"sound/SoundEngine.h"
 GameClear::GameClear() {
 	// GameClearではゲームクリアの画像のみを表示
 	spriteRender.Init("Assets/sprite/gameclear1.dds", 1920.0f, 1080.0f);
+	// ゲームクリアのBGMを読み込む
+	g_soundEngine->ResistWaveFileBank(3,"Assets/sound/GameClear.wav");
+	GameClearBGM = NewGO<SoundSource>(0);
+	GameClearBGM->Init(3);
+	GameClearBGM->Play(false);
 }
 
 GameClear::~GameClear() 
