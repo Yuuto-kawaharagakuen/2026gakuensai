@@ -97,9 +97,9 @@ void Game::Update()
 	if (player->crystalCount >= 3) {
 		//１回だけ行う
 		if (!goalUI) {
-			goal->position = { 3000.0f, 350.0f, -300.0f };
+			goal->position = { 3000.0f, 330.0f, -300.0f };
 			goalUI = NewGO<GoalUI>(0, "goalUI");
-			goalUI->position = { -300.0f, 300.0f, 0.0f };
+			goalUI->position = { -300.0f, 330.0f, 0.0f };
 		}
 	}
 	if (goal->getGoal==true) {

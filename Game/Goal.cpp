@@ -2,7 +2,7 @@
 #include "Goal.h"
 #include"Player.h"
 Goal::Goal() {
-	modelRender.Init("Assets/modelData/unityChan.tkm");
+	modelRender.Init("Assets/modelData/Flag.tkm");
 	player = FindGO<Player>("player");
 }
 Goal::~Goal() {
@@ -10,11 +10,12 @@ Goal::~Goal() {
 }
 
 void Goal::Update() {
-	//回転処理
-	Rotation();
 	//絵描きさんの更新処理
 	modelRender.Update();
 	modelRender.SetPosition(position);
+	modelRender.SetScale(Vector3(5.0f, 5.0f, 5.0f));
+	rot.SetRotationDegY(-90.0f);
+	modelRender.SetRotation(rot);
 	//プレイヤーから☆に向かうベクトルを計算。
 	Vector3 diff = player->position - position;
 
@@ -32,13 +33,6 @@ void Goal::Update() {
 		// Game 側でフラグを受け取って遷移処理を行うため、
 		// 先に破棄してしまうとフラグを読み取れなくなる。
 	}
-}
-
-void Goal::Rotation()
-{
-	rotation.AddRotationDegY(1.0f);
-
-	modelRender.SetRotation(rotation);
 }
 
 void Goal::Render(RenderContext& rc) {

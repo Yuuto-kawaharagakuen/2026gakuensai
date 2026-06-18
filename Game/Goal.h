@@ -9,14 +9,12 @@ public:
 	void Update();
 	//描画処理
 	void Render(RenderContext& rc);
-	//回転処理
-	void Rotation();
 
 	ModelRender modelRender;
 	Vector3 position;
-	Quaternion rotation;
 	FontRender fontRender;
 	Player* player;
+	Quaternion rot;
 	bool getGoal = false;
 
 };
