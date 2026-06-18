@@ -8,6 +8,5 @@ public:
 	void Render(RenderContext& rc);
 	FontRender fontRender;
 	Vector3 position = Vector3::Zero;
-	int goalnum = 0;
 };
 

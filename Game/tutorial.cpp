@@ -1,55 +1,33 @@
 #include "stdafx.h"
-#include "tutorial.h"
-#include "Player.h"
-#include "GameCamera.h"
-#include "BackGround.h"
-#include "sound/SoundEngine.h"
-#include"Title.h"
-#include"Goal.h"
+#include "Tutorial.h"
 #include"Game.h"
-tutorial::tutorial()
+#include "sound/SoundEngine.h"
+Tutorial::Tutorial()
 {
-	//プレイヤーのオブジェクトを作る
-	player = NewGO<Player>(0, "player");
-
-	//ゲームカメラのオブジェクトを作る
-	gameCamera = NewGO<GameCamera>(0, "gamecamera");
-
-	//背景のオブジェクトを作る
-	backGround = NewGO<BackGround>(0);
-	//ゲーム中のBGMを読み込む
-	g_soundEngine->ResistWaveFileBank(1, "Assets/sound/gamebgm.wav");
-	//ゲーム中のBGMを再生する
-	gameBGM = NewGO<SoundSource>(0);
-	gameBGM->Init(1);
-	gameBGM->Play(true);
-	//ゴールを生成
-	goal = NewGO<Goal>(0, "goal");
-	goal->position = { 2700.0f, 300.0f, 300.0f };
+	spriteRender.Init("Assets/sprite/tutorial.dds", 1920.0f, 1080.0f);
+	fontRender.SetColor(g_vec4Black);
+	fontRender.SetPosition({ -800.0f,400.0f,0.0f });
+	fontRender.SetScale(2.0f);
+	
 }
-tutorial::~tutorial()
+Tutorial::~Tutorial() {
+
+}
+void Tutorial::Update()
 {
-	//プレイヤーを削除する。
-	DeleteGO(player);
-	//ゲームカメラを削除する。
-	DeleteGO(gameCamera);
-	//ゲーム中のBGMを削除する。
-	DeleteGO(gameBGM);
-	//背景を削除する。
-	DeleteGO(backGround);
-	//ゴールを消す
-	DeleteGO(goal);
-}
-
-void tutorial::Update() {
-	if (goal->getGoal == true)
+	wchar_t text[256];
+	swprintf_s(text, 256, L"           ゲーム説明\n\n動き回るクリスタルをできるだけ短時間で\nたくさん集めてゴールしよう！\n\nクリスタルを３個以上集めると\nゴールが現れるぞ！\n\n\n          　　　　　Aボタンでゲーム開始");
+	fontRender.SetText(text);
+	
+	if (g_pad[0]->IsTrigger(enButtonA))
 	{
 		NewGO<Game>(0);
 		DeleteGO(this);
 	}
-	//Bキーを押されたらスタート画面に戻る
-	if (g_pad[0]->IsTrigger(enButtonLB1)) {
-		NewGO<Title>(0, "title");
-		DeleteGO(this);
-	}
+
+}
+void Tutorial::Render(RenderContext& rc)
+{
+	spriteRender.Draw(rc);
+	fontRender.Draw(rc);
 }

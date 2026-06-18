@@ -19,7 +19,7 @@ void Goal::Update() {
 	//プレイヤーから☆に向かうベクトルを計算。
 	Vector3 diff = player->position - position;
 
-	if (diff.Length() <= 120.0f) {
+	if (diff.Length() <= 150.0f) {
 		// すでにゴールしていなければ一度だけ処理する
 		if (!getGoal) {
 			//効果音の再生
@@ -29,9 +29,6 @@ void Goal::Update() {
 			se->Play(false);
 			getGoal = true;
 		}
-		// Goal オブジェクト自身はここで削除しない。
-		// Game 側でフラグを受け取って遷移処理を行うため、
-		// 先に破棄してしまうとフラグを読み取れなくなる。
 	}
 }
 

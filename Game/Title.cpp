@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Title.h"
-#include"Game.h"
+#include"Tutorial.h"
 #include "sound/SoundEngine.h"
 Title::Title()
 {
@@ -29,7 +29,7 @@ void Title::Update()
 			titleBGM->Release();
 			titleBGM = nullptr;
 		}
-		NewGO<Game>(0);
+		NewGO<Tutorial>(0);
 		DeleteGO(this);
 	}
 }

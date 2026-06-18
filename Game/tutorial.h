@@ -1,21 +1,15 @@
 #pragma once
-#include"sound/SoundSource.h"
-
-class Player;
-class GameCamera;
-class BackGround;
-class Goal;
-
-class tutorial :public IGameObject
+#include "sound/SoundSource.h"
+class Tutorial:public IGameObject
 {
 public:
-	tutorial();
-	~tutorial();
+	Tutorial();
+	~Tutorial();
 	void Update();
-	Player* player;
-	GameCamera* gameCamera;
-	BackGround* backGround;
-	Goal* goal;
-	SoundSource* gameBGM;
+	void Render(RenderContext& rc);
 
+	SpriteRender spriteRender;
+	FontRender fontRender;
+	Vector3 position = Vector3::Zero;
 };
+
