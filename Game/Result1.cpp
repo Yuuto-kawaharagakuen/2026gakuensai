@@ -6,7 +6,7 @@ Result1::Result1() {
 	//ゲームクリアの画像を読み込む
 	spriteRender.Init("Assets/sprite/result.dds",1920.0f,1080.0f);
 	//フォント表示の初期化
-	fontRender.SetPosition({ -600.0f,150.0f,0.0f});
+	fontRender.SetPosition({ -800.0f,150.0f,0.0f});
 	fontRender.SetColor(g_vec4Black);
 	fontRender.SetScale(2.0f);
 	// スコア表示用フォント初期化
