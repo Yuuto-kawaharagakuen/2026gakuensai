@@ -27,7 +27,7 @@ Game::Game()
 
 	//UIを生成
 	countUI = NewGO<CountUI>(0,"countUI");
-
+	//ここでgoalUIをnullptrにしておく。これで、ゲーム開始時にはゴールUIは存在しない状態になる。
 	goalUI = nullptr;
 	goalUIElapsedTime = 0.0f;
 	//Starクラスのオブジェクトを作る
@@ -95,7 +95,7 @@ void Game::Update()
 {
 
 	if (player->crystalCount >= 3) {
-		//１回だけ行う
+		//goalUIがnullptr(中身が空)のときにゴールを生成
 		if (!goalUI) {
 			goal->position = { 3000.0f, 330.0f, -300.0f };
 			goalUI = NewGO<GoalUI>(0, "goalUI");
