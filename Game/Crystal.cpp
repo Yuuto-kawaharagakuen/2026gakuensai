@@ -15,12 +15,11 @@ Crystal::Crystal() {
 	//☆を削除するときの音を読み込む
 	g_soundEngine->ResistWaveFileBank(2,"Assets/sound/get.wav");
 
-	//文字を表示
-	/*fontRender.SetText(L"Hello World");
-	fontRender.SetPosition({ -600.0f,100.0f,0.0f });
-	fontRender.SetColor(g_vec4White);*/
-
-
+	// 初期化
+	isStopped = false;
+	stopUsed = false;
+	stopTimer = 0.0f;
+	prevXDown = false;
 }
 
 Crystal::~Crystal()
@@ -41,10 +40,30 @@ void Crystal::Update()
 	}
 
 	//移動処理。
-	Move();
+	// Xボタンで一度だけ3秒間停止させる処理
+	if (!stopUsed && g_pad[0]->IsTrigger(enButtonX))
+	{
+		isStopped = true;
+		stopUsed = true; // 一度だけ
+		stopTimer = 3.0f; // 3秒
+	}
 
-	//回転処理。
-	Rotation();
+	// 停止中は移動・回転を行わない
+	if (!isStopped)
+	{
+		Move();
+		//回転処理。
+		Rotation();
+	}
+	else
+	{
+		// 固定フレームレート(60FPS)を想定してタイマーを減算
+		stopTimer -= 1.0f / 60.0f;
+		if (stopTimer <= 0.0f)
+		{
+			isStopped = false;
+		}
+	}
 
 	//絵描きさんの更新処理。
 	modelRender.Update();

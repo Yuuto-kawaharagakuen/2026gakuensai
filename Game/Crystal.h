@@ -24,5 +24,11 @@ public:
 	Quaternion rotation;	//クォータニオン。
 	Player* player;		//プレイヤー。
 	FontRender fontRender; //フォントレンダーを使用
+
+	// Xキーで一度だけ5秒間動きを止めるためのフラグ/タイマー
+	bool isStopped;
+	bool stopUsed;
+	float stopTimer;
+	bool prevXDown;
 };
 
