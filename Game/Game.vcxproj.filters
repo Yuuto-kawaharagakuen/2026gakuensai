@@ -23,6 +23,8 @@
     <ClCompile Include="GoalUI.cpp" />
     <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="Tutorial.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Countdown.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -41,5 +43,7 @@
     <ClInclude Include="GoalUI.h" />
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="Tutorial.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="Countdown.h" />
   </ItemGroup>
 </Project>

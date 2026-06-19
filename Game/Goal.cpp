@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Goal.h"
 #include"Player.h"
+#include "GameState.h"
 Goal::Goal() {
 	modelRender.Init("Assets/modelData/Flag.tkm");
 	player = FindGO<Player>("player");
@@ -16,18 +17,22 @@ void Goal::Update() {
 	modelRender.SetScale(Vector3(5.0f, 5.0f, 5.0f));
 	rot.SetRotationDegY(-90.0f);
 	modelRender.SetRotation(rot);
-	//プレイヤーから☆に向かうベクトルを計算。
-	Vector3 diff = player->position - position;
+	// プレイヤーが接触してゴールする処理はゲームアクティブ時のみ行う
+	if (g_IsGameActive)
+	{
+		//プレイヤーから☆に向かうベクトルを計算。
+		Vector3 diff = player->position - position;
 
-	if (diff.Length() <= 150.0f) {
-		// すでにゴールしていなければ一度だけ処理する
-		if (!getGoal) {
-			//効果音の再生
-			SoundSource* se = NewGO<SoundSource>(0);
-			se->Init(2);
-			se->SetVolume(3.5f);
-			se->Play(false);
-			getGoal = true;
+		if (diff.Length() <= 150.0f) {
+			// すでにゴールしていなければ一度だけ処理する
+			if (!getGoal) {
+				//効果音の再生
+				SoundSource* se = NewGO<SoundSource>(0);
+				se->Init(2);
+				se->SetVolume(3.5f);
+				se->Play(false);
+				getGoal = true;
+			}
 		}
 	}
 }

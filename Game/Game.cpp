@@ -11,6 +11,8 @@
 #include "CountUI.h"
 #include"Goal.h"
 #include"GoalUI.h"
+#include "GameState.h"
+#include "Countdown.h"
 Game::Game()
 {   //背景を生成
 	sky = NewGO<SkyCube>(0, "skycube");
@@ -64,6 +66,9 @@ Game::Game()
 	gameBGM->Init(1);
 	gameBGM->Play(true);
 
+	// カウントダウン用オブジェクトを作る（この中でカウントが終わると g_IsGameActive = true になる）
+	NewGO<Countdown>(0, "countdown");
+
 
 }
 
@@ -99,7 +104,6 @@ void Game::Update()
 		if (!goalUI) {
 			goal->position = { 3000.0f, 330.0f, -300.0f };
 			goalUI = NewGO<GoalUI>(0, "goalUI");
-			goalUI->position = { -300.0f, 330.0f, 0.0f };
 		}
 	}
 	if (goal->getGoal==true) {

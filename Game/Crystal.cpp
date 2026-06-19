@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "Crystal.h"
+#include "GameState.h"
 #include"Player.h"
 #include "sound/SoundEngine.h"
 #include"sound/SoundSource.h"
@@ -29,6 +30,16 @@ Crystal::~Crystal()
 
 void Crystal::Update()
 {
+	// ゲームがアクティブでない間は動作しない
+	if (g_IsGameActive == false)
+	{
+		//描画はする
+		modelRender.SetPosition(position);
+		modelRender.SetRotation(rotation);
+		modelRender.Update();
+		return;
+	}
+
 	//移動処理。
 	Move();
 

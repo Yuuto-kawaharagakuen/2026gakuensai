@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include"Game.h"
+#include "GameState.h"
 #include "Player.h"
 Player::Player()
 {
@@ -34,6 +35,16 @@ Player::~Player()
 //更新処理
 void Player::Update() 
 {
+	// ゲームがアクティブでない間は動作しない（カウントダウン中）
+	if (g_IsGameActive == false)
+	{
+		// レンダリングに必要な最低限の更新を行う
+		modelRender.SetPosition(position);
+		modelRender.SetRotation(rotation);
+		modelRender.Update();
+		return;
+	}
+
 	//移動処理
 	Move();
 

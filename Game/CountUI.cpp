@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "CountUI.h"
+#include "GameState.h"
 #include "Player.h"
 #include "Game.h"
 #include"Result1.h"
@@ -16,8 +17,12 @@ CountUI::~CountUI()
 
 void CountUI::Update()
 {
-	// 毎フレーム経過時間を加算
-	elapsedTime += g_gameTime->GetFrameDeltaTime();
+	// ゲームがアクティブでない間は時間を進めない
+	if (g_IsGameActive)
+	{
+		// 毎フレーム経過時間を加算
+		elapsedTime += g_gameTime->GetFrameDeltaTime();
+	}
 
 	wchar_t text[256];
 	swprintf_s(text, 256, L"手に入れたクリスタルの数:%d個", UInum);

@@ -2,7 +2,7 @@
 #include "GoalUI.h"
 GoalUI::GoalUI() {
 	fontRender.SetColor(g_vec4Black);
-	position = { 0.0f, 0.0f, 0.0f };
+	position = { -300.0f, 330.0f, 0.0f };
 }
 
 GoalUI::~GoalUI()
