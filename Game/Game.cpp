@@ -36,7 +36,7 @@ Game::Game()
 	Crystal* crystal1 = NewGO<Crystal>(0, "crystal");
 	crystal1->position = { 100.0f,150.0f,-200.0f };
 	crystal1->firstPosition = crystal1->position;
-
+	
 	Crystal* crystal2 = NewGO<Crystal>(0, "crystal");
 	crystal2->position = { 1000.0f,150.0f,-200.0f };
 	crystal2->firstPosition = crystal2->position;
@@ -118,6 +118,7 @@ void Game::Update()
 		gameClear->SetElapsedTime(countUI->GetElapsedTime());
 		gameClear->SetScore(countUI->Score);
 		// ゲームオブジェクトを削除
+		DeleteGO(goalUI);
 		DeleteGO(this);
 	}
 	//Bキーを押されたらスタート画面に戻る

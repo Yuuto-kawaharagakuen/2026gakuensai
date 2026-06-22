@@ -1,5 +1,5 @@
 #pragma once
-#include"sound/SoundEngine.h"
+//#include"sound/SoundEngine.h"
 //ゲームクリア
 class GameClear:public IGameObject
 {

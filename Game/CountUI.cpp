@@ -29,13 +29,11 @@ void CountUI::Update()
 	fontRender.SetText(text);
 	fontRender.SetPosition(position);
 	player = FindGO<Player>("player");
-	int seconds = (int)elapsedTime % 60;
-	if (seconds != 0) {
-		Score = player->crystalCount * 50 / seconds*5;
-	}
-	else {
-		Score = 0; // または意図したフォールバック値
-	}
+	// 経過時間の「秒部分」ではなく、累積の経過秒数を使う
+	int totalSeconds = (int)elapsedTime;
+	if (totalSeconds <= 0) totalSeconds = 1; // ゼロ除算回避
+	// 既存の係数(50 と *5)を維持して合算した形で計算する
+	Score = (player->crystalCount * 250) / totalSeconds;
 }
 
 void CountUI::Render(RenderContext& rc)

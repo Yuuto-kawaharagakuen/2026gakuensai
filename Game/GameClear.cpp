@@ -26,7 +26,7 @@ void GameClear::Update() {
 		DeleteGO(this);
 	}
 
-	// Bボタンでタイトルへ戻る（保険）
+	// Bボタンでタイトルへ戻る
 	if (g_pad[0]->IsTrigger(enButtonLB1)) {
 		NewGO<Title>(0, "title");
 		DeleteGO(this);

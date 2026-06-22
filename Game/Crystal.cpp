@@ -91,7 +91,6 @@ void Crystal::Move()
 	srand(time(nullptr));
 	position.x += rand() % 8;
 	position.x -= rand() % 8;
-	/*position.y = rand() % 151 + 50;*/
 	position.z += rand() % 8;
 	position.z -= rand() % 8;
 	if (position.x >= 4500) {
@@ -135,7 +134,7 @@ void Crystal::Move()
 //回転処理
 void Crystal::Rotation()
 {
-	rotation.AddRotationDegY(1.0f);
+	rotation.AddRotationDegY(2.0f);
 
 	modelRender.SetRotation(rotation);
 }
